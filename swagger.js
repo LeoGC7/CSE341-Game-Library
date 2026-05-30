@@ -5,8 +5,8 @@ const doc = {
         title: 'Game Library API',
         description: 'API for managing a video game library with reviews. CSE341 Project.',
     },
-    host: 'localhost:8080',
-    schemes: ['http'],
+    host: 'cse341-game-library.onrender.com',
+    schemes: ['https'],
 }
 
 const outputFile = './swagger.json'

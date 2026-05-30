@@ -5,10 +5,10 @@
     "description": "API for managing a video game library with reviews. CSE341 Project.",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-game-library.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/games/": {
