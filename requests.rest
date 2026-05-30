@@ -1,0 +1,60 @@
+### Create a game (dev)
+POST http://localhost:8080/games
+Content-Type: application/json
+
+{
+    "title": "The Witcher 3",
+    "developer": "CD Projekt Red",
+    "publisher": "CD Projekt",
+    "releaseDate": "2015-05-19",
+    "genre": "Action RPG",
+    "platform": ["PC", "PS4", "Xbox One"],
+    "rating": 9.5,
+    "price": 39.99,
+    "multiplayer": false
+}
+
+### Get all games (dev)
+GET http://localhost:8080/games
+
+### Create a review (dev)
+POST http://localhost:8080/reviews
+Content-Type: application/json
+
+{
+    "gameId": "6a19da4b8b5bd7eefd8a9f37",
+    "author": "Leonardo",
+    "rating": 9.5,
+    "text": "Amazing RPG, best story-driven game I've played",
+    "date": "2026-05-29"
+}
+
+### Get all reviews (dev)
+GET http://localhost:8080/reviews
+
+### POST with missing fields (dev) - SHOULD FAIL with 400
+POST http://localhost:8080/games
+Content-Type: application/json
+
+{
+    "title": "Some Game"
+}
+
+### POST with wrong types (dev) - SHOULD FAIL with 400
+POST http://localhost:8080/games
+Content-Type: application/json
+
+{
+    "title": 12345,
+    "developer": "CD Projekt Red",
+    "publisher": "CD Projekt",
+    "releaseDate": "2015-05-19",
+    "genre": "Action RPG",
+    "platform": "PC",
+    "rating": "amazing",
+    "price": "free",
+    "multiplayer": "maybe"
+}
+
+### Invalid ID (dev) - SHOULD FAIL with 400 not 500
+GET http://localhost:8080/games/garbage
