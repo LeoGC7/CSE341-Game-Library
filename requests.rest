@@ -40,7 +40,7 @@ Content-Type: application/json
     "title": "Some Game"
 }
 
-### POST with wrong types (dev) - SHOULD FAIL with 400
+### POST invalid Game (dev) - SHOULD FAIL with 400
 POST http://localhost:8080/games
 Content-Type: application/json
 
@@ -56,5 +56,43 @@ Content-Type: application/json
     "multiplayer": "maybe"
 }
 
-### Invalid ID (dev) - SHOULD FAIL with 400 not 500
-GET http://localhost:8080/games/garbage
+### POST Invalid Review (dev) SHOULD FAIL with 400
+POST http://localhost:8080/reviews
+Content-Type: application/json
+
+{
+    "gameId": "6a1aec06f231501ff5fdaf95",
+    "author": "Leonardo",
+    "rating": "Very good game",
+    "text": "Even after 15 years, Skyrim still pulls you in. A massive open world full of dragons, mods, and adventures that never ends.",
+    "date": "2026-05-29"
+}
+
+### PUT Invalid Game (dev)
+PUT http://localhost:8080/games/6a19da4b8b5bd7eefd8a9f37
+Content-Type: application/json
+
+{
+    "title": "The Witcher 3",
+    "developer": "CD Projekt Red",
+    "publisher": "CD Projekt",
+    "releaseDate": "2015-05-19",
+    "genre": "Action RPG",
+    "platform": ["PC", "PS4", "Xbox One"],
+    "rating": "very good",
+    "price": 39.99,
+    "multiplayer": false
+}
+
+### PUT Invalid Review (dev)
+PUT http://localhost:8080/reviews/6a19da5c8b5bd7eefd8a9f38
+Content-Type: application/json
+
+{
+    "_id": "6a19da5c8b5bd7eefd8a9f38",
+    "gameId": "6a19da4b8b5bd7eefd8a9f37",
+    "author": "Leonardo",
+    "rating": "Very good",
+    "text": "Amazing RPG, best story-driven game I've played",
+    "date": "2026-05-29"
+}
