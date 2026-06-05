@@ -3,6 +3,8 @@ dotenv.config()
 
 const express = require('express')
 const cors = require('cors')
+const session = require('express-session')
+const passport = require('./config/passport')
 const routes = require('./routes')
 const mongodb = require('./db/connect.js')
 const errorHandler = require('./middleware/errorHandler.js')
@@ -15,8 +17,22 @@ const port = process.env.PORT || 8080
 app.use(cors())
 app.use(express.json())
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumnet))
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            secure: false,
+            maxAge: 1000 * 60 * 60 * 24,
+        },
+    })
+)
 
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumnet))
 app.use('/', routes)
 
 app.use(errorHandler)
